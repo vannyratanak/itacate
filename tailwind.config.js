@@ -4,6 +4,8 @@ module.exports = {
     './app/**/*.{js,ts,jsx,tsx}',
     './page/**/*.{js,ts,jsx,tsx}',
     './ui/**/*.{js,ts,jsx,tsx}',
+    'node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}',
+    "./node_modules/tailwind-datepicker-react/dist/**/*.js", 
   ],
   // theme: {
   //   extend: {
@@ -15,6 +17,8 @@ module.exports = {
   //   },
   // },
   plugins: [
-    require('@tailwindcss/typography')
+    require('@tailwindcss/typography'),
+    require("@tailwindcss/forms"),
+    require('flowbite/plugin')
   ],
 }

@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @layer components{
   .bg-primary{
     @apply bg-[#F3EABF];
@@ -14,6 +15,15 @@
   }
   .btn{
     @apply cursor-pointer shadow-sm text-[#F3EABF] text-xl font-bold py-3 xl:w-1/5 md:w-2/5 w-3/5 bg-[#E5902C] tracking-wider prose focus:ring-[#E5902C]  focus:bg-[#E5902C]/90 focus:ring-opacity-80 hover:bg-[#E5902C]/90 focus:ring focus:ring-offset-2 rounded-lg focus:rounded-2xl transition-all;
+  }
+  .input_component{
+    @apply selection:bg-[#E5902C] selection:text-[#F3EABF] placeholder:text-[#E5902C] w-full prose border-[#E5902C] transition bg-[#F3EABF] rounded-sm shadow-sm focus:ring-[#E5902C] focus:ring-1 focus:border-[#E5902C] ;
+  }
+  .input_checkbox{
+    @apply  text-[#E5902C] border-[#E5902C] border-2  bg-[#F3EABF]  focus:ring-[#E5902C] focus:bg-[#E5902C] h-5 w-5;
+  }
+  .input_datepicker_background{
+    @apply  bg-[#E5902C]/30
   }
 }
 

@@ -16,6 +16,7 @@ export default function RootLayout({
         <TranslateController>
           {children}
         </TranslateController>
+        
       </body>
     </html>
   )

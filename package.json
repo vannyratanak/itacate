@@ -6,23 +6,31 @@
     "dev": "next dev ",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "cp-datepicker":"cp -r date-picker/ node-modules/tailwind-datepicker-react"
   },
   "dependencies": {
     "@types/node": "18.16.1",
     "@types/react": "18.2.0",
     "@types/react-dom": "18.2.1",
     "autoprefixer": "10.4.14",
+    "clsx": "^1.2.1",
     "eslint": "8.39.0",
     "eslint-config-next": "^13.3.1",
+    "flowbite": "^1.6.5",
+    "flowbite-datepicker": "^1.2.2",
+    "flowbite-react": "^0.4.4",
     "next": "^13.3.1",
     "postcss": "8.4.23",
     "react": "^18.2.0",
+    "react-date-picker": "^10.0.3",
     "react-dom": "^18.2.0",
+    "tailwind-datepicker-react": "^1.2.3",
     "tailwindcss": "3.3.2",
     "typescript": "5.0.4"
   },
   "devDependencies": {
+    "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/typography": "^0.5.9"
   }
 }
