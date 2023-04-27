@@ -1,9 +1,9 @@
 "use client";
-import { useLargeDesktop } from "@/hooks/useMediaQuery";
+import { useLargeDesktopSmallPhone } from "@/hooks/useMediaQuery";
 import Image from "next/image";
 
 export default function logoItacate() {
-    const {isDesktop,isLargeScreen}=useLargeDesktop();
+    const {isDesktop,isLargeScreen}=useLargeDesktopSmallPhone();
     return (<>
         <Image
             src={"/king.png"}
