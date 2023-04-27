@@ -10,7 +10,7 @@
   }
 
   body{
-    @apply bg-[#F3EABF];
+    @apply bg-[#F3EABF] antialiased hover:subpixel-antialiased;
   }
   .btn{
     @apply cursor-pointer shadow-sm text-[#F3EABF] text-xl font-bold py-3 xl:w-1/5 md:w-2/5 w-3/5 bg-[#E5902C] tracking-wider prose focus:ring-[#E5902C]  focus:bg-[#E5902C]/90 focus:ring-opacity-80 hover:bg-[#E5902C]/90 focus:ring focus:ring-offset-2 rounded-lg focus:rounded-2xl transition-all;

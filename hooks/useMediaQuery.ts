@@ -14,9 +14,12 @@ const useMediaQuery = (query:string)=>{
     },[matches,query])
     return matches;
 }
-const useLargeDesktop=()=>{
+const useLargeDesktopSmallPhone=()=>{
     const isDesktop = useMediaQuery("(min-width:860px)")
     const isLargeScreen = useMediaQuery("(min-width:1250px)")
-    return {isDesktop,isLargeScreen}
+    const isSmallPhone=useMediaQuery("('min-height:740px')")
+    const isHeightSmall=useMediaQuery("('max-height:600px')")
+
+    return {isDesktop,isLargeScreen,isSmallPhone,isHeightSmall}
 }
-export {useMediaQuery,useLargeDesktop}
+export {useMediaQuery,useLargeDesktopSmallPhone}
