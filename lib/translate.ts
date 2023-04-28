@@ -13,7 +13,9 @@ export type TranslateItem = {
         contact: {
             phone: string,
             email: string,
-        }
+        },
+        comment:string,
+        choose_following:string,
     }
 }
 export const lang = [
@@ -24,6 +26,7 @@ export const translateItem: TranslateItem[] = [
     {
         name: "kh",
         menu: {
+            choose_following:"Please choose the best answer for each of the following.",
             restuarant: "Was this your first visit to our restaurant?",
             languageButton: "ខ្មែរ",
             name: "ឈ្មោះ",
@@ -37,12 +40,15 @@ export const translateItem: TranslateItem[] = [
                 phone: "លេខទូរសព្ទ : 096 561 9575",
                 email: "អុីម៉ែល: itacate.phnompenh@gmail.com"
 
-            }
+            },
+
+            comment:"Comments & Suggestions"
         }
     },
     {
         name: "en",
         menu: {
+            choose_following:"Please choose the best answer for each of the following.",
             restuarant: "Was this your first visit to our restaurant?",
             languageButton: "English",
             name: "Name",
@@ -60,7 +66,8 @@ export const translateItem: TranslateItem[] = [
             contact: {
                 phone: "Contact : 096 561 9575",
                 email: "Email: itacate.phnompenh@gmail.com"
-            }
+            },
+            comment:"Comments & Suggestions"
 
         }
     }

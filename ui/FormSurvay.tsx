@@ -1,21 +1,33 @@
 "use client";
-
 import { useTranslate } from "@/hooks/useTranslate";
+import { ResponseSurvay } from "@/lib/survay";
 import Image from "next/image";
-import {  useState ,SVGAttributes} from "react";
+import { useState, SVGAttributes, use, useEffect, Suspense, FormEvent } from "react";
 import Datepicker from "tailwind-datepicker-react"
-export default function FormSurvay() {
+import ListingItemSurvay from "./ListingItemSurvay";
+import { SkeletonCard } from "@/ui/SkeletonCard";
+import { useRouter } from "next/navigation";
+
+export default function FormSurvay({ field_survay }: { field_survay: ResponseSurvay }) {
     const trans = useTranslate();
-    const [show, setShow] = useState <boolean>(false)
+    const router = useRouter()
+    const [show, setShow] = useState<boolean>(false)
     const handleChange = (selectedDate: Date) => {
     }
     const handleClose = (state: boolean) => {
         setShow(state)
     }
+    function submit(e:FormEvent<HTMLFormElement>){
+        e.preventDefault();
+        router.push("/survay-success")
+    }
+    useEffect(() => {
+        console.log(field_survay);
+    }, [field_survay])
     return (
         <>
-            <form action="" className="p-2">
-                <div className="grid lg:grid-cols-2 lg:gap-2">
+            <form action="" className="p-2 w-full " onSubmit={submit}>
+                <div className="grid lg:grid-cols-2 lg:gap-2 mx-auto">
                     <div className="">
                         <div className={`text-primary ${trans.name == "en" ? 'lg:text-3xl text-2xl' : 'lg:text-2xl text-xl'} font-semibold`}>{trans.menu.title_tell_us}</div>
                         <div className="mt-5 mb-4">
@@ -25,31 +37,48 @@ export default function FormSurvay() {
                             <InputTextComponent name={trans.menu.phone} placeholder={trans.menu.phone_placeholder} />
                         </div>
                         <div className="mb-4">
-                             <label htmlFor={trans.menu.date_visit} className="block mb-2 font-semibold">{trans.menu.date_visit} <span className=" text-rose-400">*</span></label>
-                            <DemoComponent handleChange={handleChange} show={show} handleClose={handleClose } />
+                            <label htmlFor={trans.menu.date_visit} className="block mb-2 font-semibold">{trans.menu.date_visit} <span className=" text-rose-400">*</span></label>
+                            <DemoComponent handleChange={handleChange} show={show} handleClose={handleClose} />
                         </div>
                         <div>
                             <label htmlFor={trans.menu.restuarant} className="block mb-2 font-semibold">{trans.menu.restuarant} <span className=" text-rose-400">*</span></label>
-                            <div className="grid lg:grid-cols-2">
+                            <div className="grid grid-cols-2 mb-4">
                                 <div>
-                                <input type="radio" id="Yes"  name="visit" className="mr-2 input_checkbox"  value={"true"} />
-                                <label htmlFor="Yes">Yes</label>
+                                    <input type="radio" id="Yes" name="visit" className="mr-2 input_checkbox" value={"true"} />
+                                    <label htmlFor="Yes">Yes</label>
                                 </div>
                                 <div>
-                                <input type="radio" id="No" name="visit" className="mr-2 input_checkbox"  value={"false"} />
-                                <label htmlFor="No">No</label>
+                                    <input type="radio" id="No" name="visit" className="mr-2 input_checkbox" value={"false"} />
+                                    <label htmlFor="No">No</label>
                                 </div>
-
                             </div>
                         </div>
                     </div>
                     <div className="mx-auto">
                         <Image
-                            className="transition"
+                            className="transition h-auto w-auto"
                             width={300}
                             height={90}
                             src={"/king.png"} alt={"Form King"} />
                     </div>
+                </div>
+                <div className="my-5">
+                    <Suspense fallback={<><SkeletonCard /></>}>
+                        <label htmlFor={trans.menu.choose_following} className="block mb-2 font-semibold" >{trans.menu.choose_following} <span className=" text-rose-400">*</span></label>
+
+                        <ListingItemSurvay data={field_survay} />
+
+                    </Suspense>
+                </div>
+               
+                <div className="w-full">
+                    <label htmlFor={trans.menu.comment} className="block  mb-2 font-semibold">{trans.menu.comment}</label>
+                    <TextArea />
+                </div>
+                <div className=" w-full">
+                    <button className=" float-right  btn mt-2 ">
+                        Submit
+                    </button>
                 </div>
             </form>
 
@@ -69,7 +98,11 @@ function InputTextComponent({ name, placeholder, date }: { name: string, placeho
         </>
     )
 }
-
+function TextArea() {
+    return (<>
+        <textarea className="selection:bg-[#E5902C] text-gray-700 selection:text-[#F3EABF] placeholder:text-[#E5902C] w-full border-[#E5902C] transition bg-[#F3EABF] rounded-sm shadow-sm focus:ring-[#E5902C] focus:ring-1 focus:border-[#E5902C]" rows={8} name="" placeholder="Write your comment or sugestions ...." ></textarea>
+    </>)
+}
 const options = {
     title: "Demo Title",
     autoHide: true,
@@ -90,15 +123,15 @@ const options = {
     },
     icons: {
         // () => ReactNode | JSX.Element
-        prev: () => <><ArrowLeftIcon strokeWidth={2.5} className=" h-5 w-5"/></>,
-        next: () => <><ArrowLongRightIcon strokeWidth={2.5} className=" h-5 w-5"/></>,
+        prev: () => <><ArrowLeftIcon strokeWidth={2.5} className=" h-5 w-5" /></>,
+        next: () => <><ArrowLongRightIcon strokeWidth={2.5} className=" h-5 w-5" /></>,
     },
     datepickerClassNames: "top-50",
     defaultDate: new Date(),
     language: "en",
 }
 
-const DemoComponent = ({handleChange,show,handleClose}:{handleChange: ((date: Date) => void) | undefined,show:boolean,handleClose:(show: boolean) => void}) => {
+const DemoComponent = ({ handleChange, show, handleClose }: { handleChange: ((date: Date) => void) | undefined, show: boolean, handleClose: (show: boolean) => void }) => {
     return (
         <div>
             <Datepicker options={options} onChange={handleChange} show={show} setShow={handleClose} />
@@ -107,15 +140,15 @@ const DemoComponent = ({handleChange,show,handleClose}:{handleChange: ((date: Da
 }
 export function ArrowLeftIcon(props: SVGAttributes<SVGElement>) {
     return (
-      <svg fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" {...props}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
-      </svg>
+        <svg fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" {...props}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+        </svg>
     );
-  }
-  export function ArrowLongRightIcon(props: SVGAttributes<SVGElement>) {
+}
+export function ArrowLongRightIcon(props: SVGAttributes<SVGElement>) {
     return (
-      <svg fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" {...props}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
-      </svg>
+        <svg fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" {...props}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+        </svg>
     );
-  }
+}
