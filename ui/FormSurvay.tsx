@@ -6,49 +6,42 @@ import { useState, SVGAttributes, use, useEffect, Suspense, FormEvent } from "re
 import Datepicker from "tailwind-datepicker-react"
 import ListingItemSurvay from "./ListingItemSurvay";
 import { SkeletonCard } from "@/ui/SkeletonCard";
-import { useRouter } from "next/navigation";
+import { useFormSurvay } from "@/hooks/useFormSurvay";
+import { UseFormRegister, UseFormRegisterReturn } from "react-hook-form";
 
 export default function FormSurvay({ field_survay }: { field_survay: ResponseSurvay }) {
-    const trans = useTranslate();
-    const router = useRouter()
-    const [show, setShow] = useState<boolean>(false)
-    const handleChange = (selectedDate: Date) => {
+    const { trans, submit, show, handleChange, handleClose, handleSubmit, register, errors } = useFormSurvay();
+    function ShowError({message}:{message?:string}) {
+        return (<>
+            {message ? <span className="text-rose-500">{message}</span> : null}
+        </>);
     }
-    const handleClose = (state: boolean) => {
-        setShow(state)
-    }
-    function submit(e:FormEvent<HTMLFormElement>){
-        e.preventDefault();
-        router.push("/survay-success")
-    }
-    useEffect(() => {
-        console.log(field_survay);
-    }, [field_survay])
     return (
         <>
-            <form action="" className="p-2 w-full " onSubmit={submit}>
+            <form action="#" className="p-2 w-full " onSubmit={handleSubmit(submit)}>
                 <div className="grid lg:grid-cols-2 lg:gap-2 mx-auto">
                     <div className="">
                         <div className={`text-primary ${trans.name == "en" ? 'lg:text-3xl text-2xl' : 'lg:text-2xl text-xl'} font-semibold`}>{trans.menu.title_tell_us}</div>
                         <div className="mt-5 mb-4">
-                            <InputTextComponent name={trans.menu.name} placeholder={trans.menu.name_placeholder} />
+                            <InputTextComponent register={register('username')}  error={errors.username?.message} name={trans.menu.name} placeholder={trans.menu.name_placeholder} />
                         </div>
                         <div className="mb-4">
-                            <InputTextComponent name={trans.menu.phone} placeholder={trans.menu.phone_placeholder} />
+                            <InputTextComponent register={register('phone')} error={errors.phone?.message} name={trans.menu.phone} placeholder={trans.menu.phone_placeholder} />
                         </div>
                         <div className="mb-4">
                             <label htmlFor={trans.menu.date_visit} className="block mb-2 font-semibold">{trans.menu.date_visit} <span className=" text-rose-400">*</span></label>
                             <DemoComponent handleChange={handleChange} show={show} handleClose={handleClose} />
                         </div>
                         <div>
-                            <label htmlFor={trans.menu.restuarant} className="block mb-2 font-semibold">{trans.menu.restuarant} <span className=" text-rose-400">*</span></label>
+                            <label htmlFor={trans.menu.restuarant} className="inline-block mb-2 font-semibold">{trans.menu.restuarant} <span className=" text-rose-400">*</span></label>
+                            <ShowError message={errors.visit?.message}/>
                             <div className="grid grid-cols-2 mb-4">
                                 <div>
-                                    <input type="radio" id="Yes" name="visit" className="mr-2 input_checkbox" value={"true"} />
+                                    <input type="radio" id="Yes" {...register("visit")} name="visit" className="mr-2 input_checkbox" value={"true"} />
                                     <label htmlFor="Yes">Yes</label>
                                 </div>
                                 <div>
-                                    <input type="radio" id="No" name="visit" className="mr-2 input_checkbox" value={"false"} />
+                                    <input type="radio" id="No" {...register("visit")} name="visit" className="mr-2 input_checkbox" value={"false"} />
                                     <label htmlFor="No">No</label>
                                 </div>
                             </div>
@@ -65,18 +58,17 @@ export default function FormSurvay({ field_survay }: { field_survay: ResponseSur
                 <div className="my-5">
                     <Suspense fallback={<><SkeletonCard /></>}>
                         <label htmlFor={trans.menu.choose_following} className="block mb-2 font-semibold" >{trans.menu.choose_following} <span className=" text-rose-400">*</span></label>
-
-                        <ListingItemSurvay data={field_survay} />
+                        <ListingItemSurvay data={field_survay} register={register("dataChoice")} />
 
                     </Suspense>
                 </div>
-               
+
                 <div className="w-full">
                     <label htmlFor={trans.menu.comment} className="block  mb-2 font-semibold">{trans.menu.comment}</label>
                     <TextArea />
                 </div>
                 <div className=" w-full">
-                    <button className=" float-right  btn mt-2 ">
+                    <button type="submit" className=" float-right  btn mt-2 mb-2 ">
                         Submit
                     </button>
                 </div>
@@ -85,16 +77,17 @@ export default function FormSurvay({ field_survay }: { field_survay: ResponseSur
         </>
     );
 }
-function InputTextComponent({ name, placeholder, date }: { name: string, placeholder?: string, date?: boolean }) {
+function InputTextComponent({ name, placeholder, date, register,error }: { name: string, placeholder?: string, date?: boolean, register?: UseFormRegisterReturn,error?:string }) {
     let [placehoderState, setPlaceholderState] = useState<boolean>(false);
     return (
         <>
-            <label htmlFor={name} className="block mb-2 font-semibold">{name} <span className=" text-rose-400">*</span></label>
-            <input type="text" className="input_component" onFocus={(e) => {
+            <label htmlFor={name} className={`block mb-2 font-semibold ${error?'text-rose-500':''}`}>{name} <span className=" text-rose-400">*</span></label>
+            <input type="text" className={`${error?'input_error':'input_component'}`} {...register} onFocus={(e) => {
                 setPlaceholderState(true)
             }} onBlur={(e) => {
                 setPlaceholderState(false);
             }} placeholder={placehoderState == true ? placeholder : undefined} />
+            {error?<div className="text-rose-500 mt-2">{error}</div>:null}
         </>
     )
 }
@@ -104,10 +97,10 @@ function TextArea() {
     </>)
 }
 const options = {
-    title: "Demo Title",
+    title: "Visiting Date",
     autoHide: true,
     todayBtn: false,
-    clearBtn: true,
+    clearBtn: false,
     maxDate: new Date("2030-01-01"),
     minDate: new Date("1950-01-01"),
     theme: {

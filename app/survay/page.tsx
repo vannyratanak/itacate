@@ -1,4 +1,3 @@
-// import { titleLogo } from "@/lib/translate";
 
 import ChooseLanguage from "@/ui/ChooseLanguage";
 
@@ -14,7 +13,7 @@ export default function Page() {
             </div>
             <ChooseLanguage />
             <div className="text-2xl md:text-3xl font-sans font-bold  text-primary mt-10">
-                Customer's Satisfaction Survey
+                Customer Satisfaction Survey
             </div>
         </>
     )

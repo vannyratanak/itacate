@@ -14,6 +14,12 @@ export type TranslateItem = {
             phone: string,
             email: string,
         },
+        error:{
+            username:string,
+            phone_required:string,
+            phone_format:string,
+            choose:string,
+        }
         comment:string,
         choose_following:string,
     }
@@ -26,6 +32,12 @@ export const translateItem: TranslateItem[] = [
     {
         name: "kh",
         menu: {
+            error:{
+                username:"សូមបញ្ចូលឈ្មោះ",
+                phone_required:"សូមបញ្ចូលលេខទូរស័ព្ទ",
+                phone_format:"លេខទួរស័ព្ទមិនត្រូវទម្រង់",
+                choose:"សូមជ្រើសរ់ើសចម្លើយខាងក្រោម",
+            },
             choose_following:"Please choose the best answer for each of the following.",
             restuarant: "Was this your first visit to our restaurant?",
             languageButton: "ខ្មែរ",
@@ -52,7 +64,13 @@ export const translateItem: TranslateItem[] = [
             restuarant: "Was this your first visit to our restaurant?",
             languageButton: "English",
             name: "Name",
+            error:{
+                username:"Name is required",
+                phone_required:"Phone Number is required",
+                phone_format:"Please input valid phone number",
+                choose:"Please choose the answer",
 
+            },
             phone: "Phone Number",
             name_placeholder: "TOM CRUISE",
             phone_placeholder: "000 000 000",

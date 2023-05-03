@@ -19,6 +19,9 @@
   .input_component{
     @apply selection:bg-[#E5902C] selection:text-[#F3EABF] placeholder:text-[#E5902C] w-full prose border-[#E5902C] transition bg-[#F3EABF] rounded-sm shadow-sm focus:ring-[#E5902C] focus:ring-1 focus:border-[#E5902C] ;
   }
+  .input_error{
+    @apply selection:bg-[#E5902C] selection:text-[#F3EABF] placeholder:text-rose-500 w-full prose border-rose-500 transition bg-[#F3EABF] rounded-sm shadow-sm focus:ring-rose-500 focus:ring-1 focus:border-rose-500;
+  }
   .input_checkbox{
     @apply  text-[#E5902C] border-[#E5902C] border-2  bg-[#F3EABF]  focus:ring-[#E5902C] focus:bg-[#E5902C] h-5 w-5;
   }
