@@ -58,7 +58,7 @@ export default function FormSurvay({ field_survay }: { field_survay: ResponseSur
                 <div className="my-5">
                     <Suspense fallback={<><SkeletonCard /></>}>
                         <label htmlFor={trans.menu.choose_following} className="block mb-2 font-semibold" >{trans.menu.choose_following} <span className=" text-rose-400">*</span></label>
-                        <ListingItemSurvay data={field_survay} register={register("dataChoice")} />
+                        <ListingItemSurvay data={field_survay} register={register} errors={errors}  />
 
                     </Suspense>
                 </div>
