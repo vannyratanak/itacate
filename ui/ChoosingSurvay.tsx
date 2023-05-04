@@ -16,7 +16,7 @@ export default function ChoosingSurvayUI({ data, register, errors }: { data: Ite
 
                     <div className="my-10" key={`${menu.name_en}_${menu.id}`}>
                         <label htmlFor={`dataChoice.${indexElement}.${menuName}`} className="inline-block mb-2 font-semibold">{menu.name_en} <span className=" text-rose-400">*</span></label>
-                        {errors.dataChoice?.[indexElement]?.message ? (<span className="text-rose-500">{errors?.dataChoice?.[indexElement]?.message}</span>):null}
+                        {errors.dataChoice?.[indexElement]?.message ? (<span className="text-rose-500">{errors?.dataChoice?.[indexElement]?.message as string|null}</span>):null}
                         <div className={`grid mb-4 lg:grid-cols-5 md:grid-cols-5`}>
                             {data.options.map((option, index) => (
                                 <div key={`${menuName}_${option.id}_${index}`}>
