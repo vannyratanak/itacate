@@ -19,7 +19,6 @@ export const getItemSchema = (item: DynamicData) => {
     const keys = Object.values(item);
     console.log(keys)
     const schemaObject = keys.every((acc: any, key) => {
-        console.log(acc);
         return zod.string().safeParse(acc).success;
     });
     return schemaObject;
@@ -38,7 +37,7 @@ export function useFormSurvay() {
 
     const submit = async (e: SurvaySumbitType) => {
         console.log(e);
-        // router.push("/survay-success")
+        router.push("/survay-success")
     }
    
     const schema: ZodType<SurvaySumbitType> = zod.object({
