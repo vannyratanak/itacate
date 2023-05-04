@@ -12,7 +12,7 @@ export default function ImageKhmer() {
                 src="/for_khmer.png"
                 width={ isLargeScreen?350:(isDesktop ? 300 :(isSmallPhone?200:150))}
                 height={90} alt={'Khmer New Year'}
-
+                priority
             />
         </>
     )
