@@ -110,8 +110,8 @@ const options = {
         icons: "text-[#E5902C] border-[#E5902C]/30 bg-[#E5902C]/30 focus:ring-[#E5902C]/30 focus:bg-[#E5902C]/30 hover:bg-[#E5902C]/30",
         text: "focus:text-[#F3EABF]",
         disabledText: "bg-[#E5902C]/30 text-[#E5902C]",
-        input: " text-[#F3EABF]",
-        inputIcon: "text-[#F3EABF]",
+        input: " text-black",
+        inputIcon: "text-[#F3EABF] bg-[#E5902C]",
         selected: "bg-[#E5902C] text-[#F3EABF] hover:bg-[#E5902C]",
     },
     icons: {
