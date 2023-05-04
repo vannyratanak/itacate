@@ -10,6 +10,7 @@ export default function logoItacate() {
             width={isLargeScreen? 500:(isDesktop?400:300)}
             height={90}
             alt="King no title"
+            priority
         />
     </>)
 }

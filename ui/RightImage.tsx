@@ -12,6 +12,7 @@ export default function RightImage() {
                     src={"/king.png"}
                     width={isLargeScreen?250:(isDesktop?200:150)}
                     height={90}
+                    priority
                     alt={""} />
             </div>
         </>

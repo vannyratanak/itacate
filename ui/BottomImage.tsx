@@ -11,6 +11,7 @@ export function MainBottomImage() {
                 className="absolute bottom-0 right-0 transition-all"
                 width={isLargeScreen ? 200 : (isDesktop ? 150 : 100)}
                 height={10} alt="Flower Bottom"
+                priority
             />
         </>
     )
@@ -24,6 +25,7 @@ export function FruitBottomImage(){
                 className="absolute bottom-5 right-5 transition-all"
                 width={isLargeScreen ? 350 : (isDesktop ? 300 : ( isSmallPhone? 250:150))}
                 height={90} alt="Flower Bottom"
+                priority
             />
         </>
     )
