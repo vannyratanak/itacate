@@ -28,5 +28,6 @@ jobs:
         cache: 'npm'
     - run: npm install -g yarn
     - run: yarn install
+    - run: cp -r dist node_modules/tailwind-datepicker-react/dist
     - run: yarn build
     - run: systemctl restart nginx
