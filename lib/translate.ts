@@ -19,6 +19,7 @@ export type TranslateItem = {
             phone_required:string,
             phone_format:string,
             choose:string,
+            another_choice:string,
         }
         comment:string,
         choose_following:string,
@@ -37,6 +38,7 @@ export const translateItem: TranslateItem[] = [
                 phone_required:"សូមបញ្ចូលលេខទូរស័ព្ទ",
                 phone_format:"លេខទួរស័ព្ទមិនត្រូវទម្រង់",
                 choose:"សូមជ្រើសរ់ើសចម្លើយខាងក្រោម",
+                another_choice:"សូមជ្រើសរ់ើសចម្លើយ",
             },
             choose_following:"Please choose the best answer for each of the following.",
             restuarant: "Was this your first visit to our restaurant?",
@@ -69,7 +71,7 @@ export const translateItem: TranslateItem[] = [
                 phone_required:"Phone Number is required",
                 phone_format:"Please input valid phone number",
                 choose:"Please choose the answer",
-
+                another_choice:"Please choose answer",
             },
             phone: "Phone Number",
             name_placeholder: "TOM CRUISE",
