@@ -2,7 +2,7 @@
 import ChooseLanguage from "@/ui/ChooseLanguage";
 
 export const metadata = {
-    title: 'Survay'
+    title: 'Survey'
 };
 export default function Page() {
     return (

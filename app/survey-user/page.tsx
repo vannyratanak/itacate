@@ -15,7 +15,7 @@ async function fetchSurvayField():Promise<ResponseSurvay> {
     return fields;
 }
 export const metadata = {
-    title: 'Survay User'
+    title: 'Survey User'
 };
 export default async function Page() {
     let data = await fetchSurvayField();
