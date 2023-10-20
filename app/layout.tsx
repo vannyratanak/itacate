@@ -1,21 +1,23 @@
-import { MainBottomImage } from "@/ui/BottomImage";
-import ImageKhmer from "@/ui/ImageKhmer";
-import MainShowingLogo from "@/ui/MainShowingLogo";
-export default function Layout({
-    children,
+export const metadata = {
+  title: 'Itacate',
+  description: 'Best Spanish Restaurant',
+}
+import '@/styles/globals.css'
+import TranslateController from '@/ui/TranslateController'
+
+export default function RootLayout({
+  children,
 }: {
-    children: React.ReactNode
+  children: React.ReactNode
 }) {
-    return (
-        <>
-            <div className="relative max-h-full">
-                <ImageKhmer/>
-                <div className=" max-h-full flex items-center justify-center min-h-screen flex-col gap-4 text-center z-50">
-                   <MainShowingLogo/>
-                   {children}
-                </div>
-                <MainBottomImage/>
-            </div>
-        </>
-    );
+  return (
+    <html lang="en">
+      <body>
+        <TranslateController>
+          {children}
+        </TranslateController>
+        
+      </body>
+    </html>
+  )
 }
