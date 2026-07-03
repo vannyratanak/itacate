@@ -8,7 +8,7 @@ const phoneTest = /^[+855|0|+8550][-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1
 export type DynamicData = {
     [key: string]: unknown;
 }
-export type SurvaySumbitType = {
+export type SurveySumbitType = {
     username: string,
     phone: string,
     description?: string,
@@ -23,7 +23,7 @@ export const getItemSchema = (item: DynamicData) => {
     });
     return schemaObject;
 };
-export function useFormSurvay() {
+export function useFormSurvey() {
     const trans = useTranslate();
 
     const router = useRouter();
@@ -35,12 +35,12 @@ export function useFormSurvay() {
         setShow(state);
     }
 
-    const submit = async (e: SurvaySumbitType) => {
+    const submit = async (e: SurveySumbitType) => {
         console.log(e);
-        router.push("/survay-success")
+        router.push("/survey-success")
     }
    
-    const schema: ZodType<SurvaySumbitType> = zod.object({
+    const schema: ZodType<SurveySumbitType> = zod.object({
         username: zod.string({ required_error: trans.menu.error.username }).refine(value => value != null && value != '', { message: trans.menu.error.username }),
         phone: zod.string({ required_error: trans.menu.error.phone_required }).regex(phoneTest, { message: trans.menu.error.phone_format }),
         description: zod.string().optional(),
@@ -49,7 +49,7 @@ export function useFormSurvay() {
         },{message:trans.menu.error.another_choice})),
         visit: zod.string().nullable().refine(value => value != null, { message: trans.menu.error.choose })
     })
-    const { register, handleSubmit, formState: { errors } } = useForm<SurvaySumbitType>({
+    const { register, handleSubmit, formState: { errors } } = useForm<SurveySumbitType>({
         resolver: zodResolver(schema), defaultValues: {
             dataChoice: [],
         }
