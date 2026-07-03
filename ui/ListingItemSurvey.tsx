@@ -1,10 +1,10 @@
-import { ResponseSurvay } from "@/lib/survay";
+import { ResponseSurvay } from "@/lib/survey";
 import { TableChoosingChoice } from "./TableChoosingForm";
 import ChoosingSurvayUI from "./ChoosingSurvay";
 import { Suspense } from "react";
 import { SkeletonCard } from "./SkeletonCard";
 import { FieldErrors, UseFormRegister, UseFormRegisterReturn } from "react-hook-form";
-import { SurvaySumbitType } from "@/hooks/useFormSurvay";
+import { SurvaySumbitType } from "@/hooks/useFormSurvey";
 
 export default function ListingItemSurvay({ data, register,errors}: { data: ResponseSurvay ,register:UseFormRegister<SurvaySumbitType>,errors:FieldErrors<SurvaySumbitType>}) {
     return (
