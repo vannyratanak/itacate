@@ -1,12 +1,12 @@
 "use client";
 import { useTranslate } from "@/hooks/useTranslate";
-import { ResponseSurvay } from "@/lib/survay";
+import { ResponseSurvay } from "@/lib/survey";
 import Image from "next/image";
 import { useState, SVGAttributes, use, useEffect, Suspense, FormEvent } from "react";
 import Datepicker from "tailwind-datepicker-react"
 import ListingItemSurvay from "./ListingItemSurvay";
 import { SkeletonCard } from "@/ui/SkeletonCard";
-import { useFormSurvay } from "@/hooks/useFormSurvay";
+import { useFormSurvay } from "@/hooks/useFormSurvey";
 import { UseFormRegister, UseFormRegisterReturn } from "react-hook-form";
 
 export default function FormSurvay({ field_survay }: { field_survay: ResponseSurvay }) {

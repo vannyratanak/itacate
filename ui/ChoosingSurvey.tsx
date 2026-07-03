@@ -1,5 +1,5 @@
-import { DynamicData, SurvaySumbitType, getItemSchema } from "@/hooks/useFormSurvay";
-import { ItemResponseSurvay, menuOptions, options } from "@/lib/survay";
+import { DynamicData, SurvaySumbitType, getItemSchema } from "@/hooks/useFormSurvey";
+import { ItemResponseSurvay, menuOptions, options } from "@/lib/survey";
 import { useEffect } from "react";
 import { FieldError, FieldErrors, UseFormRegister, UseFormRegisterReturn } from "react-hook-form";
 const phoneTest = /^[+855|0|+8550][-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,5}$/i;
