@@ -1,12 +1,12 @@
-import { ResponseSurvay } from "@/lib/survey";
+import { ResponseSurvey } from "@/lib/survey";
 import { TableChoosingChoice } from "./TableChoosingForm";
-import ChoosingSurvayUI from "./ChoosingSurvay";
+import ChoosingSurveyUI from "./ChoosingSurvey";
 import { Suspense } from "react";
 import { SkeletonCard } from "./SkeletonCard";
 import { FieldErrors, UseFormRegister, UseFormRegisterReturn } from "react-hook-form";
-import { SurvaySumbitType } from "@/hooks/useFormSurvey";
+import { SurveySumbitType } from "@/hooks/useFormSurvey";
 
-export default function ListingItemSurvay({ data, register,errors}: { data: ResponseSurvay ,register:UseFormRegister<SurvaySumbitType>,errors:FieldErrors<SurvaySumbitType>}) {
+export default function ListingItemSurvey({ data, register,errors}: { data: ResponseSurvey ,register:UseFormRegister<SurveySumbitType>,errors:FieldErrors<SurveySumbitType>}) {
     return (
         <>
             <Suspense fallback={<><SkeletonCard /></>}>
@@ -17,7 +17,7 @@ export default function ListingItemSurvay({ data, register,errors}: { data: Resp
                         )
                     } else {
                         return (
-                            <ChoosingSurvayUI data={value} key={value.id} register={register} errors={errors}/>
+                            <ChoosingSurveyUI data={value} key={value.id} register={register} errors={errors}/>
                         )
                     }
                 })}

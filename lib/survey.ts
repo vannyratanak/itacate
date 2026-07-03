@@ -1,5 +1,5 @@
-export type ResponseSurvay=ItemResponseSurvay[]
-export type ItemResponseSurvay={
+export type ResponseSurvey=ItemResponseSurvey[]
+export type ItemResponseSurvey={
     created_at:string,
     updated_at:string,
     id:number,

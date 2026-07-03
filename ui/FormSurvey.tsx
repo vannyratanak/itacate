@@ -1,16 +1,16 @@
 "use client";
 import { useTranslate } from "@/hooks/useTranslate";
-import { ResponseSurvay } from "@/lib/survey";
+import { ResponseSurvey } from "@/lib/survey";
 import Image from "next/image";
 import { useState, SVGAttributes, use, useEffect, Suspense, FormEvent } from "react";
 import Datepicker from "tailwind-datepicker-react"
-import ListingItemSurvay from "./ListingItemSurvay";
+import ListingItemSurvey from "./ListingItemSurvey";
 import { SkeletonCard } from "@/ui/SkeletonCard";
-import { useFormSurvay } from "@/hooks/useFormSurvey";
+import { useFormSurvey } from "@/hooks/useFormSurvey";
 import { UseFormRegister, UseFormRegisterReturn } from "react-hook-form";
 
-export default function FormSurvay({ field_survay }: { field_survay: ResponseSurvay }) {
-    const { trans, submit, show, handleChange, handleClose, handleSubmit, register, errors } = useFormSurvay();
+export default function FormSurvey({ field_survey }: { field_survey: ResponseSurvey }) {
+    const { trans, submit, show, handleChange, handleClose, handleSubmit, register, errors } = useFormSurvey();
     function ShowError({message}:{message?:string}) {
         return (<>
             {message ? <span className="text-rose-500">{message}</span> : null}
@@ -58,7 +58,7 @@ export default function FormSurvay({ field_survay }: { field_survay: ResponseSur
                 <div className="my-5">
                     <Suspense fallback={<><SkeletonCard /></>}>
                         <label htmlFor={trans.menu.choose_following} className="block mb-2 font-semibold" >{trans.menu.choose_following} <span className=" text-rose-400">*</span></label>
-                        <ListingItemSurvay data={field_survay} register={register} errors={errors}  />
+                        <ListingItemSurvey data={field_survey} register={register} errors={errors}  />
 
                     </Suspense>
                 </div>

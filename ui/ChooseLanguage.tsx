@@ -11,11 +11,11 @@ export default function ChooseLanguage() {
     <>
         <button className="btn" onClick={(e)=>{
             dispatch({type:"kh"})
-            router.push("/survay-user")
+            router.push("/survey-user")
         }}>ខ្មែរ</button>
         <button className="btn"onClick={(e)=>{
             dispatch({type:"en"})
-            router.push("/survay-user")
+            router.push("/survey-user")
         }}>English</button>   
     </>
     );
