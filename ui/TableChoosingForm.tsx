@@ -1,9 +1,9 @@
 
-import { SurvaySumbitType } from "@/hooks/useFormSurvey";
-import { ItemResponseSurvay } from "@/lib/survey";
+import { SurveySumbitType } from "@/hooks/useFormSurvey";
+import { ItemResponseSurvey } from "@/lib/survey";
 import { FieldErrors, UseFormRegister, UseFormRegisterReturn } from "react-hook-form";
 
-export function TableChoosingChoice({ data, register, errors }: { data: ItemResponseSurvay, register: UseFormRegister<SurvaySumbitType>, errors: FieldErrors<SurvaySumbitType> }) {
+export function TableChoosingChoice({ data, register, errors }: { data: ItemResponseSurvey, register: UseFormRegister<SurveySumbitType>, errors: FieldErrors<SurveySumbitType> }) {
     return (
         <>
             <table className=" table-auto w-full">

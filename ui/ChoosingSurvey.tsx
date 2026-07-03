@@ -1,10 +1,10 @@
-import { DynamicData, SurvaySumbitType, getItemSchema } from "@/hooks/useFormSurvey";
-import { ItemResponseSurvay, menuOptions, options } from "@/lib/survey";
+import { DynamicData, SurveySumbitType, getItemSchema } from "@/hooks/useFormSurvey";
+import { ItemResponseSurvey, menuOptions, options } from "@/lib/survey";
 import { useEffect } from "react";
 import { FieldError, FieldErrors, UseFormRegister, UseFormRegisterReturn } from "react-hook-form";
 const phoneTest = /^[+855|0|+8550][-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,5}$/i;
 
-export default function ChoosingSurvayUI({ data, register, errors }: { data: ItemResponseSurvay, register: UseFormRegister<SurvaySumbitType>, errors: FieldErrors<SurvaySumbitType> }) {
+export default function ChoosingSurveyUI({ data, register, errors }: { data: ItemResponseSurvey, register: UseFormRegister<SurveySumbitType>, errors: FieldErrors<SurveySumbitType> }) {
     useEffect(() => {
         console.log(errors)
     }, [errors])
