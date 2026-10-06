@@ -11,3 +11,7 @@ export type options=option[];
 export type option ={id:number,name_en?:string,name_kh?:string}
 export type menuOptions=menu[];
 export type menu = {id:number,name_en?:string,name_kh?:string,group_option_id:number}
+
+export type Lang = "kh" | "en";
+export const localName = (item: { name_en?: string, name_kh?: string }, lang: string) =>
+    (lang === "kh" ? item.name_kh || item.name_en : item.name_en || item.name_kh) ?? "";

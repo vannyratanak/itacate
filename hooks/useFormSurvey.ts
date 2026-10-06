@@ -1,58 +1,79 @@
-import { FormEvent, useEffect, useState } from "react";
+import { useState } from "react";
 import { useTranslate } from "./useTranslate";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import zod, { ZodType } from "zod";
-const phoneTest = /^[+855|0|+8550][-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,5}$/i;
-export type DynamicData = {
-    [key: string]: unknown;
-}
-export type SurveySumbitType = {
+import zod from "zod";
+import { ResponseSurvey } from "@/lib/survey";
+
+// +855 / 855 / 0 prefix followed by 8-9 digits; spaces, dots and dashes are ignored
+const phoneTest = /^(\+?855|0)\d{8,9}$/;
+export const normalizePhone = (value: string) => value.replace(/[\s.\-()]/g, "");
+
+export const answerKey = (menuId: number) => `q${menuId}`;
+
+export type SurveyFormValues = {
     username: string,
     phone: string,
+    date: string,
+    visit: string | null,
     description?: string,
-    dataChoice: DynamicData[],
-    visit?: string | null
+    answers: Record<string, string | null | undefined>,
 }
-export const getItemSchema = (item: DynamicData) => {
-    const keys = Object.values(item);
-    console.log(keys)
-    const schemaObject = keys.every((acc: any, key) => {
-        return zod.string().safeParse(acc).success;
-    });
-    return schemaObject;
-};
-export function useFormSurvey() {
+
+export function useFormSurvey(fields: ResponseSurvey) {
     const trans = useTranslate();
-
     const router = useRouter();
-    const [show, setShow] = useState<boolean>(false);
+    const [submitError, setSubmitError] = useState<string | null>(null);
+    const e = trans.menu.error;
 
-    const handleChange = (selectedDate: Date) => {
-    }
-    const handleClose = (state: boolean) => {
-        setShow(state);
-    }
+    const menuIds = fields.flatMap(group => group.menuOption.map(menu => menu.id));
 
-    const submit = async (e: SurveySumbitType) => {
-        console.log(e);
-        router.push("/survey-success")
-    }
-   
-    const schema: ZodType<SurveySumbitType> = zod.object({
-        username: zod.string({ required_error: trans.menu.error.username }).refine(value => value != null && value != '', { message: trans.menu.error.username }),
-        phone: zod.string({ required_error: trans.menu.error.phone_required }).regex(phoneTest, { message: trans.menu.error.phone_format }),
+    const schema = zod.object({
+        username: zod.string({ required_error: e.username }).trim().min(1, e.username),
+        phone: zod.string({ required_error: e.phone_required }).trim().min(1, e.phone_required)
+            .refine(value => phoneTest.test(normalizePhone(value)), { message: e.phone_format }),
+        date: zod.string().min(1),
+        visit: zod.string({ invalid_type_error: e.choose }).nullable().refine(value => value != null, { message: e.choose }),
         description: zod.string().optional(),
-        dataChoice: zod.array(zod.object({}).nonstrict().refine(value=>{
-            return getItemSchema(value);
-        },{message:trans.menu.error.another_choice})),
-        visit: zod.string().nullable().refine(value => value != null, { message: trans.menu.error.choose })
-    })
-    const { register, handleSubmit, formState: { errors } } = useForm<SurveySumbitType>({
-        resolver: zodResolver(schema), defaultValues: {
-            dataChoice: [],
+        answers: zod.object(Object.fromEntries(
+            menuIds.map(id => [answerKey(id), zod.string({ invalid_type_error: e.another_choice, required_error: e.another_choice }).min(1, e.another_choice)])
+        )),
+    });
+
+    const form = useForm<SurveyFormValues>({
+        resolver: zodResolver(schema),
+        defaultValues: { date: new Date().toISOString(), visit: null, answers: {} },
+    });
+
+    const submit = form.handleSubmit(async values => {
+        setSubmitError(null);
+        const payload = {
+            name: values.username.trim(),
+            phoneNumber: normalizePhone(values.phone),
+            dateVisit: values.date,
+            usedToVisit: values.visit === "true",
+            message: values.description?.trim() || undefined,
+            answers: menuIds.map(id => ({ menu_id: id, option_id: Number(values.answers[answerKey(id)]) })),
+        };
+        try {
+            const res = await fetch("/api/survey", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload),
+            });
+            if (!res.ok) throw new Error(String(res.status));
+            router.push("/survey-success");
+        } catch {
+            setSubmitError(e.submit_failed);
         }
-    })
-    return { submit, handleChange, handleClose, show, setShow, router, trans, errors, register, handleSubmit }
+    });
+
+    return {
+        trans, router, submit, submitError,
+        register: form.register,
+        errors: form.formState.errors,
+        isSubmitting: form.formState.isSubmitting,
+        setDate: (date: Date) => form.setValue("date", date.toISOString()),
+    };
 }

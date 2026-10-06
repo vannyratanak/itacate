@@ -1,7 +1,7 @@
 "use client";
 
 import { TranslateContext, TranslateDispatchContext, initializeTranslate, translateReducer } from "@/hooks/useTranslate";
-import { useMemo, useReducer } from "react";
+import { useEffect, useMemo, useReducer } from "react";
 
 export default function TranslateController({
     children,
@@ -9,6 +9,12 @@ export default function TranslateController({
     children: React.ReactNode
 }) {
     const [trans,dispatch]=useReducer(translateReducer,initializeTranslate);
+    useEffect(() => {
+        try {
+            const saved = sessionStorage.getItem("lang");
+            if (saved === "en" || saved === "kh") dispatch({ type: saved });
+        } catch {}
+    }, []);
     const cacheValue=useMemo(()=>({
         trans,dispatch
         }),[trans,dispatch],

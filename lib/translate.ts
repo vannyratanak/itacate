@@ -20,9 +20,15 @@ export type TranslateItem = {
             phone_format:string,
             choose:string,
             another_choice:string,
+            submit_failed:string,
         }
         comment:string,
         choose_following:string,
+        submit:string,
+        submitting:string,
+        yes:string,
+        no:string,
+        comment_placeholder:string,
     }
 }
 export const lang = [
@@ -36,12 +42,18 @@ export const translateItem: TranslateItem[] = [
             error:{
                 username:"សូមបញ្ចូលឈ្មោះ",
                 phone_required:"សូមបញ្ចូលលេខទូរស័ព្ទ",
-                phone_format:"លេខទួរស័ព្ទមិនត្រូវទម្រង់",
-                choose:"សូមជ្រើសរ់ើសចម្លើយខាងក្រោម",
-                another_choice:"សូមជ្រើសរ់ើសចម្លើយ",
+                phone_format:"លេខទូរស័ព្ទមិនត្រឹមត្រូវ",
+                choose:"សូមជ្រើសរើសចម្លើយខាងក្រោម",
+                another_choice:"សូមជ្រើសរើសចម្លើយ",
+                submit_failed:"មិនអាចបញ្ជូនបានទេ សូមព្យាយាមម្តងទៀត",
             },
-            choose_following:"Please choose the best answer for each of the following.",
-            restuarant: "Was this your first visit to our restaurant?",
+            submit:"បញ្ជូន",
+            submitting:"កំពុងបញ្ជូន...",
+            yes:"បាទ/ចាស",
+            no:"ទេ",
+            comment_placeholder:"សរសេរមតិ ឬយោបល់របស់អ្នក...",
+            choose_following:"សូមជ្រើសរើសចម្លើយដែលល្អបំផុតសម្រាប់ចំណុចនីមួយៗខាងក្រោម។",
+            restuarant: "តើនេះជាដំណើរទស្សនកិច្ចលើកដំបូងរបស់អ្នកមកភោជនីយដ្ឋានយើងខ្ញុំមែនទេ?",
             languageButton: "ខ្មែរ",
             name: "ឈ្មោះ",
             name_placeholder: "សីហា មង្គល",
@@ -49,19 +61,24 @@ export const translateItem: TranslateItem[] = [
             phone: "លេខទូរសព្ទ",
             date_visit: "កាលបរិច្ឆេទនៃដំណើរទស្សនកិច្ច:",
             title_tell_us: "ប្រាប់យើងអំពីដំណើរទស្សនកិច្ចរបស់អ្នក។",
-            feeback_message: "Your feedback is appreciated. We hope you know \n that your input will help us improve our service! \n Thank you for your effort in completing this survey.\n Feel free to let us know if you have any more \n comments or suggestions.",
+            feeback_message: "យើងខ្ញុំសូមកោតសរសើរចំពោះមតិកែលម្អរបស់អ្នក។\nយើងសង្ឃឹមថាមតិរបស់អ្នកនឹងជួយយើងឱ្យកែលម្អសេវាកម្ម!\nសូមអរគុណចំពោះការចំណាយពេលបំពេញការស្ទង់មតិនេះ។\nសូមប្រាប់យើងបន្ថែម ប្រសិនបើអ្នកមានមតិ ឬយោបល់ផ្សេងទៀត។",
             contact: {
                 phone: "លេខទូរសព្ទ : 096 561 9575",
                 email: "អុីម៉ែល: itacate.phnompenh@gmail.com"
 
             },
 
-            comment:"Comments & Suggestions"
+            comment:"មតិ និងយោបល់"
         }
     },
     {
         name: "en",
         menu: {
+            submit:"Submit",
+            submitting:"Sending...",
+            yes:"Yes",
+            no:"No",
+            comment_placeholder:"Write your comments or suggestions...",
             choose_following:"Please choose the best answer for each of the following.",
             restuarant: "Was this your first visit to our restaurant?",
             languageButton: "English",
@@ -72,6 +89,7 @@ export const translateItem: TranslateItem[] = [
                 phone_format:"Please input valid phone number",
                 choose:"Please choose the answer",
                 another_choice:"Please choose answer",
+                submit_failed:"Could not send your survey. Please try again.",
             },
             phone: "Phone Number",
             name_placeholder: "TOM CRUISE",

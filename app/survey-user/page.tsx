@@ -6,14 +6,15 @@ import { Suspense } from "react";
 const backendURL = process.env.NEXT_PUBLIC_BACKEND_URL;
 async function fetchSurveyField():Promise<ResponseSurvey> {
     const res = await fetch(backendURL + "/surveys/field", {
-        next:{revalidate:20},
-        headers: {
-            'Content-Type': 'application/json',
-        }
-    },);
-    const fields = await res.json();
-    return fields;
+        cache: 'no-store',
+        headers: { 'Content-Type': 'application/json' },
+        signal: AbortSignal.timeout(8000),
+    } as RequestInit);
+    if (!res.ok) throw new Error(`Survey fields request failed: ${res.status}`);
+    return res.json();
 }
+// Render per request: the cached (ISR) copy was served as an empty 304 once stale, giving a blank page on refresh
+export const dynamic = 'force-dynamic';
 export const metadata = {
     title: 'Survey User'
 };
