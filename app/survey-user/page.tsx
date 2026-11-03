@@ -1,4 +1,5 @@
 import { ResponseSurvey } from "@/lib/survey";
+import { fetchShop, logoSrc } from "@/lib/shop";
 import FormSurvey from "@/ui/FormSurvey";
 import { SkeletonCard } from "@/ui/SkeletonCard";
 import { Suspense } from "react";
@@ -19,7 +20,7 @@ export const metadata = {
     title: 'Survey User'
 };
 export default async function Page() {
-    let data = await fetchSurveyField();
+    const [data, shop] = await Promise.all([fetchSurveyField(), fetchShop()]);
     return (
         <>
             <div className="max-h-screen container mx-auto mt-5 max-w-screen-sm lg:max-w-screen-lg ">
@@ -29,7 +30,7 @@ export default async function Page() {
                     </div>
                 </>}>
 
-                    <FormSurvey field_survey={data} />
+                    <FormSurvey field_survey={data} logo={logoSrc(shop)} shopName={shop.name} />
                 </Suspense>
             </div>
         </>

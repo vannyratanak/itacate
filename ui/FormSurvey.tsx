@@ -9,7 +9,7 @@ import { SkeletonCard } from "@/ui/SkeletonCard";
 import { useFormSurvey } from "@/hooks/useFormSurvey";
 import { UseFormRegisterReturn } from "react-hook-form";
 
-export default function FormSurvey({ field_survey }: { field_survey: ResponseSurvey }) {
+export default function FormSurvey({ field_survey, logo, shopName }: { field_survey: ResponseSurvey, logo: string, shopName: string }) {
     const { trans, submit, submitError, isSubmitting, setDate, register, errors } = useFormSurvey(field_survey);
     const [show, setShow] = useState(false);
     function ShowError({message}:{message?:string}) {
@@ -50,10 +50,11 @@ export default function FormSurvey({ field_survey }: { field_survey: ResponseSur
                     </div>
                     <div className="mx-[2rem] mb-4 order-first lg:order-none">
                         <Image
-                            className="transition h-auto w-full"
-                            width={300}
-                            height={120}
-                            src={"/king.png"} alt={"Form King"} />
+                                className="transition mx-auto h-auto w-auto max-h-28 lg:max-h-36 object-contain"
+                                width={300}
+                                height={120}
+                                unoptimized={logo.startsWith("http")}
+                                src={logo} alt={shopName} />
                     </div>
                 </div>
                 <div className="my-5">

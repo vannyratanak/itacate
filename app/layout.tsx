@@ -1,6 +1,8 @@
-export const metadata = {
-  title: 'Itacate',
-  description: 'Best Spanish Restaurant',
+import { fetchShop } from '@/lib/shop'
+
+export async function generateMetadata() {
+  const shop = await fetchShop()
+  return { title: shop.name, description: shop.title }
 }
 import '@/styles/globals.css'
 import TranslateController from '@/ui/TranslateController'
