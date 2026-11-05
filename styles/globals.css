@@ -97,3 +97,11 @@
 }
 /* month / year / decade pickers reuse the same grid with wider cells */
 .itacate-cal .grid.w-64 > span.cal-sel { font-weight: 700; }
+
+/* The date field gets the library's blue focus ring; keep it orange like every other input. */
+#date:focus {
+  border-color: #E5902C !important;
+  --tw-ring-color: #E5902C !important;
+  box-shadow: 0 0 0 1px #E5902C !important;
+  outline: none;
+}
