@@ -1,5 +1,5 @@
 import { fetchMenu, MenuItem } from "@/lib/menu";
-import { backendURL } from "@/lib/shop";
+import { backendURL, assetBase } from "@/lib/shop";
 
 export type SitePage = { slug: string; title: string; html: string; css: string };
 
@@ -15,7 +15,7 @@ export async function fetchPage(slug: string): Promise<SitePage | null> {
 }
 
 // Images uploaded in the editor are stored as /uploads/x.png (relative to the backend).
-export const withBackendAssets = (s: string) => s.replace(/(["'(])\/uploads\//g, `$1${backendURL}/uploads/`);
+export const withBackendAssets = (s: string) => s.replace(/(["'(])\/uploads\//g, `$1${assetBase}/uploads/`);
 
 // Live blocks from the page builder are saved as placeholder divs (data-itacate="menu" | "language");
 // PageContent swaps each one, in place, for the real component.

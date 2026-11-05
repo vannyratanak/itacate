@@ -1,11 +1,14 @@
 export type Shop = { name: string; title: string; logo_url: string | null };
 
 export const backendURL = process.env.NEXT_PUBLIC_BACKEND_URL;
+// Base for images the BROWSER loads. Defaults to the backend URL (local dev); in production set it to "" so
+// /uploads/... stays same-origin (nginx proxies it to the backend, which only listens on localhost).
+export const assetBase = process.env.NEXT_PUBLIC_ASSET_URL ?? backendURL;
 const FALLBACK: Shop = { name: "Itacate", title: "Best Spanish Restaurant", logo_url: null };
 
 // The backend serves uploads as relative paths (/uploads/x.png); anything else (the offline
 // fallback logo) is a file in this app's own /public.
-export const assetUrl = (u?: string | null) => (u ? (u.startsWith("/uploads/") ? `${backendURL}${u}` : u) : null);
+export const assetUrl = (u?: string | null) => (u ? (u.startsWith("/uploads/") ? `${assetBase}${u}` : u) : null);
 
 export const DEFAULT_LOGO = "/king.png";
 // Logo set in the backend, else the built-in default.
