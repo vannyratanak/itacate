@@ -17,10 +17,9 @@ export async function fetchPage(slug: string): Promise<SitePage | null> {
 // Images uploaded in the editor are stored as /uploads/x.png (relative to the backend).
 export const withBackendAssets = (s: string) => s.replace(/(["'(])\/uploads\//g, `$1${backendURL}/uploads/`);
 
-// The page builder's "Live menu" block is saved as a placeholder div; PageContent swaps it for the real menu.
-export const MENU_BLOCK = /<div[^>]*data-itacate="menu"[^>]*>[^<]*<\/div>/g;
-
+// Live blocks from the page builder are saved as placeholder divs (data-itacate="menu" | "language");
+// PageContent swaps each one, in place, for the real component.
 // Only hits the backend for the menu when the page actually contains a Live menu block.
 export async function menuFor(page: SitePage): Promise<MenuItem[]> {
-    return page.html.split(MENU_BLOCK).length > 1 ? fetchMenu().catch(() => []) : [];
+    return /data-itacate="menu"/.test(page.html) ? fetchMenu().catch(() => []) : [];
 }
