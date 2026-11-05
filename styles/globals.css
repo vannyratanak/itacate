@@ -48,3 +48,52 @@
 }
 
 
+
+/* ---- Visit-date calendar (tailwind-datepicker-react), scoped to .itacate-cal ---- */
+.itacate-cal > div {
+  border-radius: 22px !important;
+  padding: 18px 18px 14px !important;
+  background: linear-gradient(180deg, #FFFBEA 0%, #F7EDC6 100%) !important;
+  border: 1px solid rgba(229, 144, 44, .28);
+  box-shadow: 0 18px 40px -12px rgba(150, 90, 20, .35), 0 2px 6px rgba(150, 90, 20, .12) !important;
+}
+/* title */
+.itacate-cal > div > div:first-child > div:first-child {
+  font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
+  color: #B8741F !important; padding: 2px 0 12px !important;
+}
+/* prev / month / next */
+.itacate-cal .cal-nav {
+  background: transparent !important; border: 0 !important; color: #8A4F0E !important;
+  transition: background .15s, transform .15s, color .15s;
+}
+.itacate-cal .cal-nav:hover { background: rgba(229, 144, 44, .16) !important; color: #6B3A06 !important; }
+.itacate-cal .cal-nav:active { transform: scale(.96); }
+.itacate-cal .cal-nav:focus { box-shadow: 0 0 0 3px rgba(229, 144, 44, .35) !important; }
+.itacate-cal .flex.justify-between > button { border-radius: 9999px !important; }
+.itacate-cal .flex.justify-between > button:first-child,
+.itacate-cal .flex.justify-between > button:last-child { width: 36px; height: 36px; padding: 0 !important; display: grid; place-items: center; }
+.itacate-cal .flex.justify-between > button:nth-child(2) { font-size: 15px; font-weight: 700; padding: 8px 16px !important; }
+.itacate-cal .flex.justify-between { margin-bottom: 10px; align-items: center; }
+/* weekday header */
+.itacate-cal .dow {
+  font-size: 10.5px !important; font-weight: 700 !important; letter-spacing: .1em; text-transform: uppercase;
+  color: #C98A3B !important;
+}
+/* day cells */
+.itacate-cal .grid.w-64 { width: 17.5rem; row-gap: 2px; }
+.itacate-cal .grid.w-64 > span {
+  display: grid; place-items: center; height: 38px; line-height: 1 !important;
+  border-radius: 9999px !important; font-size: 14px; font-weight: 600; color: #4A3412;
+  background: transparent !important; transition: background .12s, color .12s, transform .12s;
+}
+.itacate-cal .grid.w-64 > span:hover { background: rgba(229, 144, 44, .18) !important; }
+.itacate-cal .grid.w-64 > span.cal-out { color: rgba(138, 79, 14, .35) !important; font-weight: 500; }
+.itacate-cal .grid.w-64 > span.cal-out:hover { background: rgba(229, 144, 44, .1) !important; }
+.itacate-cal .grid.w-64 > span.cal-sel,
+.itacate-cal .grid.w-64 > span.cal-sel:hover {
+  background: linear-gradient(145deg, #F0A43A, #E5902C) !important; color: #FFFBEA !important;
+  box-shadow: 0 6px 14px -4px rgba(200, 110, 10, .6); transform: scale(1.04);
+}
+/* month / year / decade pickers reuse the same grid with wider cells */
+.itacate-cal .grid.w-64 > span.cal-sel { font-weight: 700; }

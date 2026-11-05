@@ -4,6 +4,7 @@ import { ResponseSurvey } from "@/lib/survey";
 import Image from "next/image";
 import { useState, SVGAttributes, Suspense } from "react";
 import Datepicker from "tailwind-datepicker-react"
+import { datepickerOptions } from "./datepickerOptions";
 import ListingItemSurvey from "./ListingItemSurvey";
 import { SkeletonCard } from "@/ui/SkeletonCard";
 import { useFormSurvey } from "@/hooks/useFormSurvey";
@@ -100,52 +101,10 @@ function TextArea({ register, placeholder }: { register: UseFormRegisterReturn, 
         <textarea id="description" className="selection:bg-[#E5902C] text-gray-700 selection:text-[#F3EABF] placeholder:text-[#E5902C] w-full border-[#E5902C] transition bg-[#F3EABF] rounded-lg shadow-sm focus:ring-[#E5902C] focus:ring-1 focus:border-[#E5902C]" rows={6} placeholder={placeholder} {...register} />
     )
 }
-const options = {
-    title: "Visiting Date",
-    autoHide: true,
-    todayBtn: false,
-    clearBtn: false,
-    maxDate: new Date("2030-01-01"),
-    minDate: new Date("1950-01-01"),
-    theme: {
-        background: "bg-[#F3EABF]",
-        todayBtn: "",
-        clearBtn: "text-[#E5902C] border-[#E5902C]/30 bg-[#E5902C]/30 focus:ring-[#E5902C]/30 focus:bg-[#E5902C]/30 hover:bg-[#E5902C]/30",
-        icons: "text-[#E5902C] border-[#E5902C]/30 bg-[#E5902C]/30 focus:ring-[#E5902C]/30 focus:bg-[#E5902C]/30 hover:bg-[#E5902C]/30",
-        text: "focus:text-[#F3EABF]",
-        disabledText: "bg-[#E5902C]/30 text-[#E5902C]",
-        input: " text-black",
-        inputIcon: "text-[#F3EABF] bg-[#E5902C]",
-        selected: "bg-[#E5902C] text-[#F3EABF] hover:bg-[#E5902C]",
-    },
-    icons: {
-        // () => ReactNode | JSX.Element
-        prev: () => <><ArrowLeftIcon strokeWidth={2.5} className=" h-5 w-5" /></>,
-        next: () => <><ArrowLongRightIcon strokeWidth={2.5} className=" h-5 w-5" /></>,
-    },
-    datepickerClassNames: "top-50",
-    defaultDate: new Date(),
-    language: "en",
-}
-
 const DemoComponent = ({ handleChange, show, handleClose }: { handleChange: ((date: Date) => void) | undefined, show: boolean, handleClose: (show: boolean) => void }) => {
     return (
         <div>
-            <Datepicker options={options} onChange={handleChange} show={show} setShow={handleClose} />
+            <Datepicker options={datepickerOptions} onChange={handleChange} show={show} setShow={handleClose} />
         </div>
     )
-}
-export function ArrowLeftIcon(props: SVGAttributes<SVGElement>) {
-    return (
-        <svg fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" {...props}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
-        </svg>
-    );
-}
-export function ArrowLongRightIcon(props: SVGAttributes<SVGElement>) {
-    return (
-        <svg fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" {...props}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
-        </svg>
-    );
 }
